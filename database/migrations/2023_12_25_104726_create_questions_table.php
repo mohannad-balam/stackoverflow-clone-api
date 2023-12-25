@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->timestamps();
 
+            //if error in relation then add this line
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
