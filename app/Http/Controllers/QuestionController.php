@@ -34,7 +34,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $question = new Question();
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -42,7 +43,11 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        $request->user()->questions()->create(
+            $request->only('title', 'body')
+        );
+
+        return redirect()->route('questions.index')->with('success', 'your question has been submitted');
     }
 
     /**
