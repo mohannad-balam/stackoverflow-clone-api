@@ -55,7 +55,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+
     }
 
     /**
@@ -63,7 +63,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -71,7 +71,8 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->only('title', 'body'));
+        return redirect()->route('questions.index')->with('success','your question has been updated');
     }
 
     /**
