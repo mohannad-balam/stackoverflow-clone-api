@@ -35,6 +35,15 @@
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                         <div class="ms-auto">
                                             <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                            <form method="POST"
+                                            action="{{ route('questions.destroy', $question->id) }}"
+                                            class="form-delete"
+                                            onsubmit="return confirm('are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+
+                                        </form>
                                         </div>
                                     </div>
                                     <p class="lead">
