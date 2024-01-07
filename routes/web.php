@@ -24,5 +24,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('questions', QuestionController::class);
+Route::resource('questions', QuestionController::class)->except('show');
+Route::get('questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
 
