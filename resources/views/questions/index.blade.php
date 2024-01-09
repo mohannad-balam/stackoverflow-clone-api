@@ -34,16 +34,21 @@
                                     <div class="d-flex align-">
                                         <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
                                         <div class="ms-auto">
-                                            <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
-                                            <form method="POST"
-                                            action="{{ route('questions.destroy', $question->id) }}"
-                                            class="form-delete"
-                                            onsubmit="return confirm('are you sure?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                            @if (Auth::user()->can('update-question', $question))
+                                                <a href="{{ route('questions.edit', $question->id) }}"
+                                                    class="btn btn-sm btn-outline-info">Edit</a>
+                                            @endif
 
-                                        </form>
+                                            @if (Auth::user()->can('delete-question', $question))
+                                                <form method="POST"
+                                                    action="{{ route('questions.destroy', $question->id) }}"
+                                                    class="form-delete" onsubmit="return confirm('are you sure?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                     <p class="lead">
